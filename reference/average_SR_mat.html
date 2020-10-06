@@ -40,8 +40,7 @@
 
 
 <meta property="og:title" content="モデル平均的な再生産関係を与える — average_SR_mat" />
-<meta property="og:description" content="モデル平均的な再生産関係を与える
-モデル平均的な再生産関係を与える" />
+<meta property="og:description" content="モデル平均的な再生産関係を与える" />
 
 
 
@@ -120,7 +119,6 @@
 
     <div class="ref-description">
     <p>モデル平均的な再生産関係を与える</p>
-<p>モデル平均的な再生産関係を与える</p>
     </div>
 
     <pre class="usage"><span class='fu'>average_SR_mat</span><span class='op'>(</span>
@@ -133,21 +131,8 @@
   <span class='va'>recruit_age</span>,
   resid_type <span class='op'>=</span> <span class='st'>"lognormal"</span>,
   resample_year_range <span class='op'>=</span> <span class='fl'>0</span>,
-  recruit_intercept <span class='op'>=</span> <span class='va'>recruit_intercept</span>,
-  bias_correction <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span>
-
-<span class='fu'>average_SR_mat</span><span class='op'>(</span>
-  <span class='va'>res_vpa</span>,
-  <span class='va'>res_SR_list</span>,
-  range_list <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>500</span>, <span class='fl'>501</span><span class='op'>:</span><span class='fl'>1000</span><span class='op'>)</span>,
-  <span class='va'>SR_mat</span>,
-  <span class='va'>seed_number</span>,
-  <span class='va'>start_random_rec_year_name</span>,
-  <span class='va'>recruit_age</span>,
-  resid_type <span class='op'>=</span> <span class='st'>"lognormal"</span>,
-  resample_year_range <span class='op'>=</span> <span class='fl'>0</span>,
-  recruit_intercept <span class='op'>=</span> <span class='va'>recruit_intercept</span>,
+  regime_shift_option <span class='op'>=</span> <span class='cn'>NULL</span>,
+  recruit_intercept <span class='op'>=</span> <span class='fl'>0</span>,
   bias_correction <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
