@@ -323,7 +323,7 @@ future_vpa <- function(tmb_data,
                        optim_method="none", # or "R" or "none"
                        multi_init = 1,
                        multi_lower = 0.0001,
-                       multi_upper = 10,
+                       multi_upper = 100,
                        objective ="MSY", # or PGY, percentB0, Bempirical
                        obj_value = 0,                         
                        obj_stat  ="mean",
