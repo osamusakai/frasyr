@@ -1874,7 +1874,7 @@ calc_Fratio <- function(faa, waa, maa, M, SPRtarget=30, waa.catch=NULL,Pope=TRUE
                                    min.age=0,max.age=Inf,Pope=Pope,ssb.coef=0)$spr %>% sum()
     SPR_original <- SPR_original/SPR0*100
     if(!is.null(SPRtarget)){
-        opt_res <- optimize(tmpfunc,interval=c(-10,50),SPR0=SPR0)
+        opt_res <- optimize(tmpfunc,interval=c(-10,10),SPR0=SPR0)
         SPR_est <- calc.rel.abund(sel=faa,Fr=exp(opt_res$minimum),na=length(faa),
                                   M=M, waa=waa, waa.catch=waa.catch,maa=maa,
                                   min.age=0,max.age=Inf,Pope=Pope,ssb.coef=0)$spr %>% sum()
