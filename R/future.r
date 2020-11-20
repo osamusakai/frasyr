@@ -661,18 +661,29 @@ future_vpa_R <- function(naa_mat,
     
     if(sum(HCR_mat[t,,"expect_wcatch"])>0){
       F_max_tmp <- apply(F_mat[,t,],2,max)
-      # F_mat[,t,]がものすごく小さい値になっている場合、そのままで入れるとFへの乗数が壁に当たる場合があるので最大１で正規化する F_max_tmp>0をF_max_tmp!=0へ
+      # F_mat[,t,]がものすごく小さい値になっている場合、そのままで入れるとFへの乗数が壁に当たる場合があるので最大１で正規化する 
       saa.tmp <- sweep(F_mat[,t,],2,F_max_tmp,FUN="/")
-      fix_catch_multiplier <- purrr::map_dbl(which(F_max_tmp!=0),
+      fix_catch_multiplier <- purrr::map_dbl(which(F_max_tmp>0),
                                              function(x) caa.est.mat(naa=N_mat[,t,x], saa=saa.tmp[,x],
                                                                      waa=waa_catch_mat[,t,x], M=M_mat[,t,x],
                                                                      catch.obs=HCR_mat[t,x,"expect_wcatch"],
                                                                      set_max1=FALSE, max_exploitation_rate=max_exploitation_rate,
                                                                      max_F=max_F,
                                                                      Pope=as.logical(Pope))$x)
-      F_mat[,t,which(F_max_tmp!=0)] <- sweep(saa.tmp[,which(F_max_tmp!=0)],2, fix_catch_multiplier, FUN="*")
+      F_mat[,t,which(F_max_tmp>0)] <- sweep(saa.tmp[,which(F_max_tmp!=0)],2, fix_catch_multiplier, FUN="*")
       HCR_realized[t,which(F_max_tmp!=0),"beta_gamma"] <- HCR_realized[t,which(F_max_tmp!=0),"beta_gamma"] *
-                                            fix_catch_multiplier / F_max_tmp[which(F_max_tmp!=0)]
+                                            fix_catch_multiplier / F_max_tmp[which(F_max_tmp>0)]
+
+#      fix_catch_multiplier <- purrr::map_dbl(which(!is.na(F_max_tmp)),
+#                                             function(x) caa.est.mat(naa=N_mat[,t,x], saa=saa.tmp[,x],
+#                                                                     waa=waa_catch_mat[,t,x], M=M_mat[,t,x],
+#                                                                     catch.obs=HCR_mat[t,x,"expect_wcatch"],
+#                                                                     set_max1=FALSE, max_exploitation_rate=max_exploitation_rate,
+#                                                                     max_F=max_F,
+#                                                                     Pope=as.logical(Pope))$x)
+#      F_mat[,t,which(!is.na(F_max_tmp))] <- sweep(saa.tmp[,which(F_max_tmp!=0)],2, fix_catch_multiplier, FUN="*")
+#      HCR_realized[t,which(F_max_tmp!=0),"beta_gamma"] <- HCR_realized[t,which(F_max_tmp!=0),"beta_gamma"] *
+#                                            fix_catch_multiplier / F_max_tmp[which(is.na(F_max_tmp))]
     }
     
     if(t<total_nyear){
